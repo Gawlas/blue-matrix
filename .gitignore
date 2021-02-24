@@ -1,0 +1,8 @@
+# IDE config
+/.idea/
+
+# test coverage output
+/coverage/
+
+# node modules
+/node_modules/

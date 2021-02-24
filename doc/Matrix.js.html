@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Matrix.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Matrix.html">Matrix</a><ul class='methods'><li data-type='method'><a href="Matrix.html#getColumnDimension">getColumnDimension</a></li><li data-type='method'><a href="Matrix.html#getDimensions">getDimensions</a></li><li data-type='method'><a href="Matrix.html#getElement">getElement</a></li><li data-type='method'><a href="Matrix.html#getElements">getElements</a></li><li data-type='method'><a href="Matrix.html#getRowDimension">getRowDimension</a></li><li data-type='method'><a href="Matrix.html#setElement">setElement</a></li></ul></li><li><a href="MatrixBuilder.html">MatrixBuilder</a><ul class='methods'><li data-type='method'><a href="MatrixBuilder.html#.createIdentityMatrix">createIdentityMatrix</a></li><li data-type='method'><a href="MatrixBuilder.html#.createZerosMatrix">createZerosMatrix</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Matrix.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Class representing a matrix. &lt;br/>
+ * Internally matrix's elements are stored in two dimensional array.
+ */
+class Matrix {
+  /**
+   * Creates a new matrix.
+   *
+   * @param  {...any} args arguments
+   * @example
+   * const A = new Matrix();
+   * // A = [ ]
+   *
+   * const B = new Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+   * //     [ 1 2 3 ]
+   * // B = [ 4 5 6 ]
+   * //     [ 7 8 9 ]
+   */
+  constructor(...args) {
+    /**
+     * matrix elements
+     * @type {Array&lt;Array&lt;number>>}
+     * @readonly
+     * @example
+     * //     [ 1 2 3 ]
+     * // A = [ 4 5 6 ]
+     * //     [ 7 8 9 ]
+     *
+     * console.log(A.elements); // [[1,2,3], [4,5,6], [7,8,9]];
+     */
+    this.elements = null;
+    // TODO: implement getter/setter
+    // TODO: getter - return copy
+    // TODO: setter - throw error
+
+    /**
+     * number of rows
+     * @type {Number}
+     * @readonly
+     * @example
+     * //     [ 1 1 1 1 ]
+     * // A = [ 2 2 2 2 ]
+     * //     [ 3 3 3 3 ]
+     *
+     * console.log(A.rows); // 3
+     */
+    this.rows = null;
+
+    /**
+     * number of columns
+     * @type {Number}
+     * @readonly
+     * @example
+     * //     [ 1 1 1 1 ]
+     * // A = [ 2 2 2 2 ]
+     * //     [ 3 3 3 3 ]
+     *
+     * console.log(A.columns) // 4
+     */
+    this.columns = null;
+
+    // new Matrix();
+    if (args.length === 0) {
+      this.rows = 0;
+      this.columns = 0;
+      this.elements = [];
+      // eslint-disable-next-line brace-style
+    }
+
+    // new Matrix(rows);
+    else if (args.length === 1 &amp;&amp; Array.isArray(args[0])) {
+      const rowArray = args[0];
+
+      // validate arguments
+      // TODO: add validation and tests
+
+      this.rows = rowArray.length;
+      this.columns = rowArray[0].length;
+      this.elements = rowArray.map((row) => row.slice());
+
+      // eslint-disable-next-line brace-style
+    }
+
+    // Invalid Arguments
+    else {
+      throw new TypeError('invalid arguments');
+    }
+  }
+
+  /**
+   * Returns number of rows.
+   *
+   * @returns {Number}
+   * @example
+   * //     [ 1  2  3  4 ]
+   * // A = [ 5  6  7  8 ]
+   * //     [ 9 10 11 12 ]
+   *
+   * A.getRowDimension(); // 3
+   * */
+  getRowDimension() {
+    return this.rows;
+  }
+
+  /**
+   * Returns number of columns.
+   *
+   * @returns {Number}
+   * @example
+   * //     [ 1  2  3  4 ]
+   * // A = [ 5  6  7  8 ]
+   * //     [ 9 10 11 12 ]
+   *
+   * A.getColumnDimension(); // 4
+   * */
+  getColumnDimension() {
+    return this.columns;
+  }
+
+  /**
+   * Returns matrix dimensions.
+   *
+   * @returns {{columns: Number, rows: Number}}
+   * object with &lt;b>rows&lt;/b> and &lt;b>columns&lt;/b> properties
+   * @example
+   * //     [ 1  2  3  4 ]
+   * // A = [ 5  6  7  8 ]
+   * //     [ 9 10 11 12 ]
+   *
+   * A.getDimensions(); // {columns: 4, rows: 3}
+   *
+   */
+  getDimensions() {
+    return {
+      columns: this.columns,
+      rows: this.rows,
+    };
+  }
+
+  /**
+   * Returns array of rows. &lt;/br>
+   * Creates new array, you can't affect matrix by modifying returned array.
+   * @returns {Array&lt;Array&lt;number>>}
+   * @example
+   * //     [ 1  2  3  4 ]
+   * // A = [ 5  6  7  8 ]
+   * //     [ 9 10 11 12 ]
+   *
+   * A.getElements(); // [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]];
+   */
+  getElements() {
+    return this.elements.map((row) => row.slice());
+  }
+
+  /**
+   * Get element specified by column and row.
+   *
+   * @param {number} column   column index - indexed from zero
+   * @param {number} row      row index - indexed from zero
+   * @return {number}         element specified by column and row
+   * @throws {TypeError}      if the row or column is not a number type
+   * @throws {RangeError}     if the row or column index is not valid
+   * @example
+   * //     [ 1  2  3  4 ]
+   * // A = [ 5  6  7  8 ]
+   * //     [ 9 10 11 12 ]
+   *
+   * A.getElement(3, 1); // 8
+   */
+  getElement(column, row) {
+    // check arguments type
+    if (typeof (column) !== 'number') throw new TypeError('column should be a number');
+    if (typeof (row) !== 'number') throw new TypeError('row should be a number');
+
+    // check arguments range
+    if (!Matrix.isIntegerInRange(column, 0, this.columns - 1)) throw new RangeError('column - invalid range');
+    if (!Matrix.isIntegerInRange(row, 0, this.rows - 1)) throw new RangeError('row - invalid range');
+
+    // return element
+    return this.elements[row][column];
+  }
+
+  /**
+   * Set matrix element specified by column and row.
+   *
+   * @param {number} column   column index - indexed from zero
+   * @param {number} row      row index - indexed from zero
+   * @param {number} value    element value
+   * @throws {TypeError}      if the row or column is not a number type
+   * @throws {RangeError}     if the row or column index is not valid
+   * @example
+   * //     [ 0 0 0 0 ]       [ 0 0 0 0 ]
+   * // A = [ 0 0 0 0 ]  -->  [ 0 0 7 0 ]
+   * //     [ 0 0 0 0 ]       [ 0 0 0 0 ]
+   *
+   * A.setElement(2, 1, 7);
+   */
+  setElement(column, row, value) {
+    // check arguments type
+    if (typeof (column) !== 'number') throw new TypeError('column should be a number');
+    if (typeof (row) !== 'number') throw new TypeError('row should be a number');
+    if (typeof (value) !== 'number') throw new TypeError('value should be a number');
+
+    // check arguments range
+    if (!Matrix.isIntegerInRange(column, 0, this.columns - 1)) throw new RangeError('column - invalid range');
+    if (!Matrix.isIntegerInRange(row, 0, this.rows - 1)) throw new RangeError('row - invalid range');
+
+    // update element
+    this.elements[row][column] = value;
+  }
+
+  /**
+   * Checks if given element is integer in range from min to max.
+   *
+   * @param {number} element
+   * @param {number} min
+   * @param {number} max
+   * @return {boolean}
+   * @private
+   */
+  static isIntegerInRange(element, min, max) {
+    if (!Number.isInteger(element)) return false;
+
+    return !(element &lt; min || element > max);
+  }
+}
+
+export { Matrix as default };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Wed Feb 24 2021 22:20:45 GMT+0100 (czas środkowoeuropejski standardowy) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "blue-matrix",
+  "version": "0.0.0",
+  "description": "matrix lib",
+  "main": "main.js",
+  "type": "module",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "scripts": {
+    "lint": "npx eslint src",
+    "lint-fix": "npx eslint src --fix",
+    "doc": "npx jsdoc -c jsdoc.confg.json src",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "author": "Paweł Gawlas <pagawlas@gmail.com>",
+  "devDependencies": {
+    "@jest/globals": "^26.6.2",
+    "docdash": "^1.2.0",
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3",
+    "jsdoc": "^3.6.6"
+  }
+}
