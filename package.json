@@ -1,9 +1,22 @@
 {
   "name": "blue-matrix",
   "version": "0.0.0",
-  "description": "matrix lib",
+  "description": "simple lib implementing matrix",
+  "keywords": [
+    "matrix",
+    "lib",
+    "math"
+  ],
+  "license": "MIT",
   "main": "main.js",
   "type": "module",
+  "author": "Paweł Gawlas",
+  "homepage": "https://github.com/Gawlas/blue-matrix",
+  "bugs": "https://github.com/Gawlas/blue-matrix/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gawlas/blue-matrix"
+  },
   "directories": {
     "doc": "doc",
     "test": "test"
@@ -14,7 +27,6 @@
     "doc": "npx jsdoc -c jsdoc.confg.json src",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
-  "author": "Paweł Gawlas <pagawlas@gmail.com>",
   "devDependencies": {
     "@jest/globals": "^26.6.2",
     "docdash": "^1.2.0",
