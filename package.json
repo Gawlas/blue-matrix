@@ -28,6 +28,8 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "devDependencies": {
+    "@commitlint/cli": "^12.0.1",
+    "@commitlint/config-conventional": "^12.0.1",
     "@jest/globals": "^26.6.2",
     "docdash": "^1.2.0",
     "eslint": "^7.20.0",
